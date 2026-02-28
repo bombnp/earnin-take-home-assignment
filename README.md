@@ -115,7 +115,11 @@ Candidates are required to create a public or private repository (accessible by 
 
 # Running Tests
 
-All test files are located in `tests` directory.
+## Overview
+
+I've implemented the tests using `pytest` framework to simulate calling the API and asserting the responses per the given scenarions. All test files are located in `tests` directory.
+
+The GitHub Actions for running the tests is located at `.github/workflows/test.yml` which will run the tests and output the report to the PR as PR comment, whether it failed or passed. I decided to go with this route as it's easier to notice when the tests passed (via GitHub notification), and ease of debug for minor test failures. For major failures spanning over multiple test files, devs may prefer deep-diving into the action's logs.
 
 ## Prerequisites
 
@@ -191,4 +195,3 @@ PR with passing tests: https://github.com/bombnp/earnin-take-home-assignment/pul
 
 PR with failing tests: https://github.com/bombnp/earnin-take-home-assignment/pull/2
 <img width="1880" height="1760" alt="image" src="https://github.com/user-attachments/assets/389af12c-1fcf-4ddc-89d4-9cfccf02c333" />
-

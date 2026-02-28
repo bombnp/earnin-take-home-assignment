@@ -3,4 +3,5 @@ sqlalchemy
 psycopg2-binary
 aiohttp
 pytest
+pytest-md
 pytest-asyncio

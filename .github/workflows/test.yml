@@ -60,16 +60,15 @@ jobs:
         id: report_summary
         if: always()
         run: |
-          echo "summary=$(tail -n+2 report.md)" >> "$GITHUB_OUTPUT"
+          echo "# ${{ steps.pytest.outcome == 'success' && '✅ Tests Passed' || '❌ Tests Failed' }}" > summary.md
+          tail -n+2 report.md >> summary.md
 
       - name: Output results to PR comment
         uses: peter-evans/create-or-update-comment@v5
         if: always()
         with:
           issue-number: ${{ github.event.number }}
-          body: |
-            # ${{ steps.pytest.outcome == 'success' && '✅ Tests Passed' || '❌ Tests Failed' }}
-            ${{ steps.report_summary.outputs.summary }}
+          body-path: summary.md
 
       - name: Tear down services
         if: always()

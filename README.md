@@ -180,3 +180,15 @@ python -m pytest tests/ -v --pastebin=all
 ## Bonus: GitHub Actions
 
 The workflow at [`.github/workflows/test.yml`](.github/workflows/test.yml) runs the full test suite automatically on every pull request targeting `main`. It spins up Docker services, seeds the database, runs pytest, outputs to PR, and tears down on completion.
+
+I decided to go with having the workflow add test results comment on the PR itself as well, as I find it easier for people to notice the results (whether it failed or passed). For minor failures, devs can just resolve it with the summary in the comment. For multiple failing tests, devs can decide to deep-dive in the action's logs.
+
+Example:
+<img width="804" height="534" alt="image" src="https://github.com/user-attachments/assets/3ceb5bd4-a2ef-44ca-9681-7d887338a22a" />
+
+PR with passing tests: https://github.com/bombnp/earnin-take-home-assignment/pull/1
+<img width="1848" height="1760" alt="image" src="https://github.com/user-attachments/assets/8007b534-df07-4932-bab2-d2110f38a443" />
+
+PR with failing tests: https://github.com/bombnp/earnin-take-home-assignment/pull/2
+<img width="1880" height="1760" alt="image" src="https://github.com/user-attachments/assets/389af12c-1fcf-4ddc-89d4-9cfccf02c333" />
+

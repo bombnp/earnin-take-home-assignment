@@ -54,13 +54,13 @@ jobs:
           API_BASE_URL: http://localhost:8000
           DATABASE_URL: postgresql://postgres:postgres@localhost/airline
         run: |
-          python -m pytest tests/ -v --md out/report.md
+          python -m pytest tests/ -v --md report.md
 
       - name: Prepare report summary
         id: report_summary
         if: always()
         run: |
-          echo "summary=$(tail -n+2 out/report.md)" >> "$GITHUB_OUTPUT"
+          echo "summary=$(tail -n+2 report.md)" >> "$GITHUB_OUTPUT"
 
       - name: Output results to PR comment
         uses: peter-evans/create-or-update-comment@v5

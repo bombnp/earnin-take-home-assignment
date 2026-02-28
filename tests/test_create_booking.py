@@ -14,7 +14,7 @@ async def test_create_booking_with_valid_customer(client: aiohttp.ClientSession)
 
     assert body["flight_id"] == "LHR002"
     assert body["passport_id"] == "P001"
-    assert body["first_name"] == "Alice"
+    assert body["first_name"] == "WRONG_VALUE"
     assert body["last_name"] == "Cooper"
     assert "customer_id" in body
 

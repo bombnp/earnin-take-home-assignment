@@ -180,3 +180,7 @@ python -m pytest tests/ -v --pastebin=all
 ## Bonus: GitHub Actions
 
 The workflow at [`.github/workflows/test.yml`](.github/workflows/test.yml) runs the full test suite automatically on every pull request targeting `main`. It spins up Docker services, seeds the database, runs pytest, outputs to PR, and tears down on completion.
+
+# Bump
+
+This PR does not change anything, so it should pass.

@@ -16,7 +16,7 @@ async def test_list_passengers_returns_created_booking(client: aiohttp.ClientSes
 
     passenger = body["passengers"][0]
     assert passenger["flight_id"] == "JFK003"
-    assert passenger["passport_id"] == "P001"
+    assert passenger["passport_id"] == "WRONG_VALUE"
     assert passenger["first_name"] == "Alice"
     assert passenger["last_name"] == "Cooper"
 

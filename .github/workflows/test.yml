@@ -48,13 +48,28 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - uses: pavelzw/pytest-action@v2
+      - name: Run pytest
+        id: pytest
+        env:
+          API_BASE_URL: http://localhost:8000
+          DATABASE_URL: postgresql://postgres:postgres@localhost/airline
+        run: |
+          python -m pytest tests/ -v --md out/report.md
+
+      - name: Prepare report summary
+        id: report_summary
+        if: always()
+        run: |
+          echo "summary=$(tail -n+2 out/report.md)" >> "$GITHUB_OUTPUT"
+
+      - name: Output results to PR comment
+        uses: peter-evans/create-or-update-comment@v5
+        if: always()
         with:
-          emoji: false
-          verbose: true
-          job-summary: true
-          custom-pytest: python -m pytest
-          custom-arguments: tests/ -v
+          issue-number: ${{ github.event.number }}
+          body: |
+            # ${{ steps.pytest.outcome == 'success' && '✅ Tests Passed' || '❌ Tests Failed' }}
+            ${{ steps.report_summary.outputs.summary }}
 
       - name: Tear down services
         if: always()

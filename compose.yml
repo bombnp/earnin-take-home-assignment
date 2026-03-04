@@ -19,8 +19,10 @@ services:
 
   airline_api_dev:
     build: .
-    ports: 
+    ports:
       - 8000:8000
     environment:
       - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/airline
       - PASSPORT_API=http://passport_api:8080
+    depends_on:
+      - postgres

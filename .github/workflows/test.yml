@@ -19,27 +19,27 @@ jobs:
       - name: Start services
         run: docker compose up -d
 
-      - name: Wait for API to be healthy
-        run: |
-          for i in $(seq 30); do
-            if curl -sf http://localhost:8000/ > /dev/null; then
-              echo "API is up"
-              break
-            fi
-            echo "Waiting for API... ($i/30)"
-            sleep 2
-          done
+      # - name: Wait for API to be healthy
+      #   run: |
+      #     for i in $(seq 30); do
+      #       if curl -sf http://localhost:8000/ > /dev/null; then
+      #         echo "API is up"
+      #         break
+      #       fi
+      #       echo "Waiting for API... ($i/30)"
+      #       sleep 2
+      #     done
 
-      - name: Wait for Wiremock to be healthy
-        run: |
-          for i in $(seq 1 30); do
-            if curl -sf http://localhost:8081/__admin/health > /dev/null; then
-              echo "Wiremock is up"
-              break
-            fi
-            echo "Waiting for Wiremock... ($i/30)"
-            sleep 2
-          done
+      # - name: Wait for Wiremock to be healthy
+      #   run: |
+      #     for i in $(seq 1 30); do
+      #       if curl -sf http://localhost:8081/__admin/health > /dev/null; then
+      #         echo "Wiremock is up"
+      #         break
+      #       fi
+      #       echo "Waiting for Wiremock... ($i/30)"
+      #       sleep 2
+      #     done
 
       - name: Apply DB schema
         run: docker compose exec -T postgres bash -c "/home/scripts/exec_sql.sh schema.sql"
